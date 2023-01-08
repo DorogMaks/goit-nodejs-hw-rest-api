@@ -63,12 +63,12 @@
     "id": "urW6A",
     "name": "Luke Skywalker",
     "email": "light.side@mail.com",
-    "phone": "(231) 123-2233"
+    "phone": "231 123-2233"
   },
   {
     "id": "22QQo",
     "name": "Darth Vader",
     "email": "dark.side@mail.com",
-    "phone": "(111) 111-1111"
+    "phone": "+380 (11) 111-1111"
   }
 ]

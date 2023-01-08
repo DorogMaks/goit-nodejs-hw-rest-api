@@ -4,7 +4,7 @@ const { nanoid } = require('nanoid');
 
 const contactsPath = path.resolve(__dirname, './contacts.json');
 
-async function readContacts() {
+const readContacts = async () => {
   try {
     const contactsRaw = await fs.readFile(contactsPath);
     const contacts = await JSON.parse(contactsRaw);
@@ -12,11 +12,11 @@ async function readContacts() {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function writeContacts(data) {
+const writeContacts = async (data) => {
   await fs.writeFile(contactsPath, JSON.stringify(data, null, 2));
-}
+};
 
 const listContacts = async () => {
   return await readContacts();

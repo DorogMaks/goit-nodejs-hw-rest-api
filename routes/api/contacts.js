@@ -6,17 +6,18 @@ const {
   deleteContactHandler,
   putContactHandler,
 } = require('../../controllers/contacts.controllers');
+const { tryCatchWrapper } = require('../../helpers');
 
 const router = express.Router();
 
-router.get('/', getAllContactsHandler);
+router.get('/', tryCatchWrapper(getAllContactsHandler));
 
-router.get('/:contactId', getSomeContactHandler);
+router.get('/:contactId', tryCatchWrapper(getSomeContactHandler));
 
-router.post('/', postContactHandler);
+router.post('/', tryCatchWrapper(postContactHandler));
 
-router.delete('/:contactId', deleteContactHandler);
+router.delete('/:contactId', tryCatchWrapper(deleteContactHandler));
 
-router.put('/:contactId', putContactHandler);
+router.put('/:contactId', tryCatchWrapper(putContactHandler));
 
 module.exports = router;

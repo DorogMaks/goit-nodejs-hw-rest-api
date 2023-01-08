@@ -7,7 +7,7 @@ const {
 } = require('../models/contacts');
 const { httpError } = require('../helpers');
 
-const getAllContactsHandler = async (req, res, next) => {
+const getContactsHandler = async (req, res, next) => {
   const contacts = await listContacts();
 
   if (!contacts.length) {
@@ -17,7 +17,7 @@ const getAllContactsHandler = async (req, res, next) => {
   res.json(contacts);
 };
 
-const getSomeContactHandler = async (req, res, next) => {
+const getContactHandler = async (req, res, next) => {
   const contact = await getContactById(req.params.contactId);
 
   if (!contact) {
@@ -28,12 +28,6 @@ const getSomeContactHandler = async (req, res, next) => {
 };
 
 const postContactHandler = async (req, res, next) => {
-  const { name, email, phone } = req.body;
-
-  if (!name || !email || !phone) {
-    return next(httpError(400, 'Missing required name field'));
-  }
-
   const newContact = await addContact(req.body);
 
   res.status(201).json(newContact);
@@ -56,10 +50,6 @@ const deleteContactHandler = async (req, res, next) => {
 const putContactHandler = async (req, res, next) => {
   const { contactId } = req.params;
 
-  if (!Object.keys(req.body).length) {
-    return next(httpError(400, 'Missing fields'));
-  }
-
   const updatedContact = await updateContact(contactId, req.body);
 
   if (!updatedContact) {
@@ -70,8 +60,8 @@ const putContactHandler = async (req, res, next) => {
 };
 
 module.exports = {
-  getAllContactsHandler,
-  getSomeContactHandler,
+  getContactsHandler,
+  getContactHandler,
   postContactHandler,
   deleteContactHandler,
   putContactHandler,

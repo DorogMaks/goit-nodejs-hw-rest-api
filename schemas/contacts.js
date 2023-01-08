@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const contactsSchema = Joi.object({
+const postContactSchema = Joi.object({
   name: Joi.string()
     .pattern(
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
@@ -10,8 +10,9 @@ const contactsSchema = Joi.object({
     .max(30)
     .required()
     .messages({
-      'any.required': 'You should provide name',
+      'any.required': 'Missing required name field',
     }),
+
   email: Joi.string()
     .email({
       minDomainSegments: 2,
@@ -19,16 +20,38 @@ const contactsSchema = Joi.object({
     })
     .required()
     .messages({
-      'any.required': 'You should provide email',
+      'any.required': 'Missing required email field',
     }),
+
   phone: Joi.string()
     .pattern(
       /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/,
       'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
     )
+    .required()
     .messages({
-      'any.required': 'You should provide phone number',
+      'any.required': 'Missing required phone number field',
     }),
 });
 
-module.exports = { contactsSchema };
+const putContactSchema = Joi.object({
+  name: Joi.string()
+    .pattern(
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+      "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+    )
+    .min(3)
+    .max(30),
+
+  email: Joi.string().email({
+    minDomainSegments: 2,
+    tlds: { allow: ['com', 'net', 'org'] },
+  }),
+
+  phone: Joi.string().pattern(
+    /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/,
+    'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
+  ),
+}).or('name', 'email', 'phone');
+
+module.exports = { postContactSchema, putContactSchema };

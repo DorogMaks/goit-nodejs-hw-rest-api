@@ -70,5 +70,28 @@
     "name": "Darth Vader",
     "email": "dark.side@mail.com",
     "phone": "+380 (11) 111-1111"
+  },
+  {
+    "id": "kR4fD",
+    "name": "Luke Skywalker",
+    "email": "light.side@mail.com",
+    "phone": "231 738-2369"
+  },
+  {
+    "id": "K2oy5",
+    "name": "Luke Skywalker",
+    "email": "light.side@mail.com",
+    "phone": "231 738-2369"
+  },
+  {
+    "id": "GY2D9",
+    "name": "Luke Skywalker",
+    "email": "light.side@mail.com"
+  },
+  {
+    "id": "3eHMG",
+    "name": "Darth Vader",
+    "email": "dark.side@mail.com",
+    "phone": "+380 (11) 111-1111"
   }
 ]

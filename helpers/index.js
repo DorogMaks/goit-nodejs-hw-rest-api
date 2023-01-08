@@ -8,17 +8,18 @@ function tryCatchWrapper(endpointFn) {
   };
 }
 
-function httpError(status, message) {
-  const err = new Error(message);
-  err.status = status;
-  return err;
+class HttpError extends Error {
+  constructor(status, message) {
+    super(message);
+    this.status = status;
+  }
 }
 
 function validateBody(schema) {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
-      return next(httpError(400, error.message));
+      return next(new HttpError(400, error.message));
     }
     return next();
   };
@@ -26,6 +27,6 @@ function validateBody(schema) {
 
 module.exports = {
   tryCatchWrapper,
-  httpError,
+  HttpError,
   validateBody,
 };

@@ -11,7 +11,7 @@ const {
   postContactSchema,
   putContactSchema,
   updateStatusContactSchema,
-} = require('../../schemas/contacts');
+} = require('../../schemas/joi');
 
 const router = express.Router();
 

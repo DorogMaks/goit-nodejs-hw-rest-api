@@ -43,7 +43,7 @@ const deleteContactHandler = async (req, res, next) => {
   res.json({ message: 'Contact deleted' });
 };
 
-const putContactHandler = async (req, res, next) => {
+const updateContactHandler = async (req, res, next) => {
   const { contactId } = req.params;
 
   const updatedContact = await Contact.findByIdAndUpdate(contactId, req.body, {
@@ -57,10 +57,11 @@ const putContactHandler = async (req, res, next) => {
   res.json(updatedContact);
 };
 
+
 module.exports = {
   getContactsHandler,
   getContactHandler,
   postContactHandler,
   deleteContactHandler,
-  putContactHandler,
+  updateContactHandler,
 };

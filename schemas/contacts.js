@@ -32,6 +32,8 @@ const postContactSchema = Joi.object({
     .messages({
       'any.required': 'Missing required phone number field',
     }),
+
+  favorite: Joi.boolean().optional().default(false),
 });
 
 const putContactSchema = Joi.object({
@@ -54,4 +56,14 @@ const putContactSchema = Joi.object({
   ),
 }).or('name', 'email', 'phone');
 
-module.exports = { postContactSchema, putContactSchema };
+const updateStatusContactSchema = Joi.object({
+  favorite: Joi.boolean().required().messages({
+    'any.required': 'Mmissing field favorite',
+  }),
+});
+
+module.exports = {
+  postContactSchema,
+  putContactSchema,
+  updateStatusContactSchema,
+};

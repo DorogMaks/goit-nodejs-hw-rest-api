@@ -4,12 +4,13 @@ const {
   getContactHandler,
   postContactHandler,
   deleteContactHandler,
-  putContactHandler,
+  updateContactHandler,
 } = require('../../controllers/contacts.controllers');
 const { tryCatchWrapper, validateBody } = require('../../helpers');
 const {
   postContactSchema,
   putContactSchema,
+  updateStatusContactSchema,
 } = require('../../schemas/contacts');
 
 const router = express.Router();
@@ -29,7 +30,13 @@ router.delete('/:contactId', tryCatchWrapper(deleteContactHandler));
 router.put(
   '/:contactId',
   validateBody(putContactSchema),
-  tryCatchWrapper(putContactHandler)
+  tryCatchWrapper(updateContactHandler)
+);
+
+router.patch(
+  '/:contactId/favorite',
+  validateBody(updateStatusContactSchema),
+  tryCatchWrapper(updateContactHandler)
 );
 
 module.exports = router;

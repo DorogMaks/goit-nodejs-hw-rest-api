@@ -1,11 +1,11 @@
 const express = require('express');
 const {
   getContactsHandler,
-  getContactHandler,
+  getContactByIdHandler,
   postContactHandler,
   deleteContactHandler,
   updateContactHandler,
-} = require('../../controllers/contacts.controllers');
+} = require('../../handlers');
 const { validateId, validateBody } = require('../../middleware');
 const { asyncWrapper } = require('../../helpers');
 const {
@@ -18,7 +18,7 @@ const router = express.Router();
 
 router.get('/', asyncWrapper(getContactsHandler));
 
-router.get('/:contactId', validateId(), asyncWrapper(getContactHandler));
+router.get('/:contactId', validateId(), asyncWrapper(getContactByIdHandler));
 
 router.post(
   '/',

@@ -1,7 +1,7 @@
 const { Contact } = require('../models/contact');
 const { HttpError } = require('../helpers');
 
-const getContactsHandler = async (req, res, next) => {
+const getContacts = async (req, res, next) => {
   const contacts = await Contact.find({});
 
   if (!contacts.length) {
@@ -11,4 +11,4 @@ const getContactsHandler = async (req, res, next) => {
   res.json(contacts);
 };
 
-module.exports = getContactsHandler;
+module.exports = getContacts;

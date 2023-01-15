@@ -6,8 +6,8 @@ const {
   deleteContactHandler,
   updateContactHandler,
 } = require('../../controllers/contacts.controllers');
+const { validateId, validateBody } = require('../../middleware');
 const { asyncWrapper } = require('../../helpers');
-const validateBody = require('../../middleware/validateBody');
 const {
   postContactSchema,
   putContactSchema,
@@ -18,7 +18,7 @@ const router = express.Router();
 
 router.get('/', asyncWrapper(getContactsHandler));
 
-router.get('/:contactId', asyncWrapper(getContactHandler));
+router.get('/:contactId', validateId(), asyncWrapper(getContactHandler));
 
 router.post(
   '/',
@@ -26,16 +26,18 @@ router.post(
   asyncWrapper(postContactHandler)
 );
 
-router.delete('/:contactId', asyncWrapper(deleteContactHandler));
+router.delete('/:contactId', validateId(), asyncWrapper(deleteContactHandler));
 
 router.put(
   '/:contactId',
+  validateId(),
   validateBody(putContactSchema),
   asyncWrapper(updateContactHandler)
 );
 
 router.patch(
   '/:contactId/favorite',
+  validateId(),
   validateBody(updateStatusContactSchema),
   asyncWrapper(updateContactHandler)
 );

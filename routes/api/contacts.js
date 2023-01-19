@@ -5,7 +5,7 @@ const {
   postContact,
   deleteContact,
   updateContact,
-} = require('../../controllers');
+} = require('../../controllers/contacts');
 const { validateId, validateBody } = require('../../middleware');
 const { asyncWrapper } = require('../../helpers');
 const {

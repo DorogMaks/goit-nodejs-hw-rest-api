@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { User } = require('../../models');
 const { HttpError } = require('../../helpers');
 
@@ -15,8 +16,10 @@ const login = async (req, res, next) => {
   if (!isPasswordValid)
     return next(new HttpError(401, 'Email or password is wrong'));
 
+  const token = jwt.sign({ id: isUserValid._id }, process.env.JWT_SECRET);
+
   res.json({
-    token: isUserValid.token,
+    token,
     user: {
       email: isUserValid.email,
       subscription: isUserValid.subscription,

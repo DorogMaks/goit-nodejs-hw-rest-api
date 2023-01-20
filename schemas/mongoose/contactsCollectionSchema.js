@@ -24,7 +24,6 @@ const contactsCollectionSchema = new Schema(
       ref: 'user',
     },
   },
-
   {
     versionKey: false,
   }

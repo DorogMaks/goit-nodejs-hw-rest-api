@@ -1,6 +1,6 @@
 const { model } = require('mongoose');
 const { usersCollectionSchema } = require('../schemas/mongoose');
 
-const User = model('contact', usersCollectionSchema);
+const User = model('user', usersCollectionSchema);
 
 module.exports = { User };

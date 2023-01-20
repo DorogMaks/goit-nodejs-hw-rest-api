@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const postUserSchema = Joi.object({
+const authUserSchema = Joi.object({
   email: Joi.string()
     .email({
       minDomainSegments: 2,
@@ -24,4 +24,4 @@ const postUserSchema = Joi.object({
     }),
 });
 
-module.exports = postUserSchema;
+module.exports = authUserSchema;

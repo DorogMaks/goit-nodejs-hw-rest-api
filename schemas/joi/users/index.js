@@ -1,5 +1,5 @@
-const postUserSchema = require('./postUserSchema');
+const authUserSchema = require('./authUserSchema');
 
 module.exports = {
-  postUserSchema,
+  authUserSchema,
 };

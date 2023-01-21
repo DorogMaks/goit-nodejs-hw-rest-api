@@ -17,9 +17,12 @@ const login = async (req, res, next) => {
     return next(new HttpError(401, 'Email or password is wrong'));
 
   const token = jwt.sign({ id: isUserValid._id }, process.env.JWT_SECRET);
+  
+  await User.findByIdAndUpdate(isUserValid._id, { $set: { token: token } });
+  isUserValid.token = token;
 
   res.json({
-    token,
+    token: isUserValid.token,
     user: {
       email: isUserValid.email,
       subscription: isUserValid.subscription,

@@ -22,6 +22,7 @@ const contactsCollectionSchema = new Schema(
     owner: {
       type: SchemaTypes.ObjectId,
       ref: 'user',
+      required: true,
     },
   },
   {

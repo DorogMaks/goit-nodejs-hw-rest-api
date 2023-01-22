@@ -1,5 +1,5 @@
 const express = require('express');
-const { validateId, validateBody } = require('../../middleware');
+const { validateId, validateBody, validateToken } = require('../../middleware');
 const {
   postContactSchema,
   putContactSchema,
@@ -16,25 +16,22 @@ const {
 
 const contactsRouter = express.Router();
 
+contactsRouter.use(validateToken());
+
 contactsRouter.get('/', asyncWrapper(getContacts));
-
 contactsRouter.get('/:contactId', validateId(), asyncWrapper(getContactById));
-
 contactsRouter.post(
   '/',
   validateBody(postContactSchema),
   asyncWrapper(postContact)
 );
-
 contactsRouter.delete('/:contactId', validateId(), asyncWrapper(deleteContact));
-
 contactsRouter.put(
   '/:contactId',
   validateId(),
   validateBody(putContactSchema),
   asyncWrapper(updateContact)
 );
-
 contactsRouter.patch(
   '/:contactId/favorite',
   validateId(),

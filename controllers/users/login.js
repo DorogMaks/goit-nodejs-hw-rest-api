@@ -16,13 +16,21 @@ const login = async (req, res, next) => {
   if (!isPasswordValid)
     return next(new HttpError(401, 'Email or password is wrong'));
 
-  const token = jwt.sign({ id: isUserValid._id }, process.env.JWT_SECRET);
-  
-  await User.findByIdAndUpdate(isUserValid._id, { $set: { token: token } });
-  isUserValid.token = token;
+  const payload = { id: isUserValid._id };
+  const { JWT_SECRET } = process.env;
+
+  const token = jwt.sign(payload, JWT_SECRET, {
+    expiresIn: '1h',
+  });
+
+  const updatedUser = await User.findByIdAndUpdate(
+    isUserValid._id,
+    { token: token },
+    { new: true }
+  );
 
   res.json({
-    token: isUserValid.token,
+    token: updatedUser.token,
     user: {
       email: isUserValid.email,
       subscription: isUserValid.subscription,

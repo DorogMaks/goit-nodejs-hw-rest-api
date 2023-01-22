@@ -15,6 +15,7 @@ function validateToken() {
 
     try {
       const { id } = jwt.verify(token, JWT_SECRET);
+
       const user = await User.findById(id);
 
       if (!user || user.token !== token)

@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../../models');
 const { HttpError } = require('../../helpers');
 
+const { JWT_SECRET } = process.env;
+
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -17,7 +19,6 @@ const login = async (req, res, next) => {
     return next(new HttpError(401, 'Email or password is wrong'));
 
   const payload = { id: isUserValid._id };
-  const { JWT_SECRET } = process.env;
 
   const token = jwt.sign(payload, JWT_SECRET, {
     expiresIn: '1h',

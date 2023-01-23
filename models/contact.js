@@ -1,6 +1,6 @@
 const { model } = require('mongoose');
-const schema = require('../schemas/mongoose/contactsCollectionSchema');
+const { contactsCollectionSchema } = require('../schemas/mongoose');
 
-const Contact = model('contact', schema);
+const Contact = model('contact', contactsCollectionSchema);
 
 module.exports = { Contact };

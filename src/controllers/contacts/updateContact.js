@@ -10,6 +10,7 @@ const updateContact = async (req, res, next) => {
       owner: _id,
       _id: contactId,
     },
+    req.body,
     { new: true }
   );
 

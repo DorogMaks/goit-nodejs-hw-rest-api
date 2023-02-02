@@ -9,6 +9,7 @@ const {
   getUserData,
   updateSubscription,
   uploadAvatar,
+  userVerification,
 } = require('../../controllers/users');
 
 const usersRouter = express.Router();
@@ -29,5 +30,6 @@ usersRouter.patch(
   upload.single('avatar'),
   asyncWrapper(uploadAvatar)
 );
+usersRouter.get('/verify/:verificationToken', asyncWrapper(userVerification));
 
 module.exports = usersRouter;

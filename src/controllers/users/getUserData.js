@@ -1,7 +1,7 @@
 const { HttpError } = require('../../helpers');
 const { User } = require('../../models');
 
-const current = async (req, res, next) => {
+const getUserData = async (req, res, next) => {
   const { _id } = req.user;
 
   const user = await User.findById(_id);
@@ -14,4 +14,4 @@ const current = async (req, res, next) => {
   });
 };
 
-module.exports = current;
+module.exports = getUserData;

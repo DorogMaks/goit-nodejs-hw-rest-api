@@ -18,7 +18,7 @@ function validateToken() {
 
       const user = await User.findById(id);
 
-      if (!user || user.token !== token)
+      if (!user || user?.token !== token)
         return next(new HttpError(401, 'Not authorized'));
 
       req.user = user;
